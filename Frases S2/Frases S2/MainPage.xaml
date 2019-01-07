@@ -1,0 +1,93 @@
+﻿<Page
+    x:Class="Frases_S2.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Frases_S2"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:WindowsPhone81="using:Microsoft.AdMediator.WindowsPhone81"  
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI" 
+    xmlns:Models="using:Frases_S2.Models"
+    mc:Ignorable="d" Background="#1E90FF">
+
+    <!--Barra de comandos-->
+    <Page.BottomAppBar>
+        <CommandBar x:Name="BarraComandos" 
+                    BorderBrush="#FF1BA1E2" 
+                    Background="DodgerBlue" 
+                    Visibility="Visible" ClosedDisplayMode="Compact">
+            <CommandBar.Foreground>
+                <SolidColorBrush Color="White"/>
+            </CommandBar.Foreground>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="Sobre" Label="Sobre" Margin="5,0,0,0" Click="Sobre_Click" Icon="Help"/>
+                <AppBarButton x:Name="Favoritos" Label="Favoritos" Margin="5,0,0,0" Click="Favoritos_Click" Icon="Favorite"/>
+                <AppBarButton x:Name="Configuracoes" Label="Configs" Margin="5,0,0,0" Click="Configuracoes_Click" Icon="Setting"/>
+                <AppBarButton x:Name="FeedBack" Label="FeedBack" Margin="5,0,0,0" Click="FeedBack_Click" Icon="ReportHacked"/>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="Remove_ADS" Label="🚫 Remover Anúncios" Click="Remove_ADS_Click"/>
+                <AppBarButton x:Name="Avaliar" Label="🌟 Avaliar o app" Click="Avaliar_Click"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    <!-- Conteudo -->
+    <Grid Background="White">
+        <!-- TOpo com nome e icone-->
+        <Grid Background="#1E90FF" Height="62" VerticalAlignment="Top">
+            <!--Icone de Pesquisa-->
+            <SymbolIcon x:Name="Pesquisar" Visibility="Collapsed" Symbol="Zoom" Grid.Column="1" Tapped="Pesquisar_Tapped" HorizontalAlignment="Right" Width="70" RenderTransformOrigin="0.5,0.5">
+                <SymbolIcon.RenderTransform>
+                    <CompositeTransform Rotation="90"/>
+                </SymbolIcon.RenderTransform>
+            </SymbolIcon>
+            <!--Icone da pagina-->
+            <SymbolIcon Symbol="Home"
+                        Grid.Column="0" 
+                        Foreground="White" 
+                        HorizontalAlignment="Left" 
+                        Width="75" 
+                        Height="58"
+                        VerticalAlignment="Top"/>
+            <!--Boas Vindas-->
+            <TextBlock x:Name="Visitante"
+                       Text="Olá, Visitante!" 
+                       Foreground="White" 
+                       VerticalAlignment="Center" 
+                       FontSize="22"                       
+                       Margin="80,21,75,15" />
+        </Grid>
+        <ListView Margin="3,62,3,0" CharacterSpacing="3" x:Name="listitem" RenderTransformOrigin="0.5,0.5" SelectionMode="Single" IsSwipeEnabled="False" SelectionChanged="listitem_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,5,0,5">
+                        <Image x:Name="Categorias" Source="{Binding Path=ImgCategorias }" NineGrid="5,1" Margin="5,0" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!--Anuncios da Microsoft-->
+        <!--<WindowsPhone81:AdMediatorControl 
+                        x:Name="Home_ADS"
+                        Margin="43,464,37,6"
+                        Id="AdMediator-Id-720c84d6-fe1f-49de-9634-5cf6a66b594f" 
+                        Width="320"
+                        HorizontalAlignment="Center"
+                        Height="50"               
+                        VerticalAlignment="Bottom"                 
+                        />-->
+
+        <UI:AdControl  x:Name="Home_ADS"
+                       ApplicationId="9wzdncrfhz6t"
+                       AdUnitId="1100037282"
+                       Margin="43,464,37,6"
+                       HorizontalAlignment="Left"
+                       Width="320"
+                       Height="50"               
+                       Grid.Row="1" VerticalAlignment="Bottom"/>         
+
+    </Grid>
+</Page>
+
+

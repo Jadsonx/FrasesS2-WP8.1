@@ -1,0 +1,3 @@
+MainPackage=C:\Users\Loja\Desktop\Frank Cell\Projetos\Frases S2\Frases S2\Frases S2\bin\ARM\Release\Frases S2_6.3.0.2_ARM.appx
+ResourcePack=C:\Users\Loja\Desktop\Frank Cell\Projetos\Frases S2\Frases S2\Frases S2\bin\ARM\Release\Frases S2_6.3.0.2_language-en.appx
+ResourcePack=C:\Users\Loja\Desktop\Frank Cell\Projetos\Frases S2\Frases S2\Frases S2\bin\ARM\Release\Frases S2_6.3.0.2_language-pt.appx

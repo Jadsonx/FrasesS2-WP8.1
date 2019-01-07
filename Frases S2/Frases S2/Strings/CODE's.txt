@@ -1,0 +1,142 @@
+﻿       
+	   
+	   //Notificação PUSH
+	    private void ShowToastNotification(string message)
+        {
+            ToastTemplateType toastType = ToastTemplateType.ToastText02;
+
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(toastType);
+
+            XmlNodeList toastTextElement = toastXml.GetElementsByTagName("text");
+            toastTextElement[0].AppendChild(toastXml.CreateTextNode("Mensagem do Desenvolvedor!"));
+            toastTextElement[1].AppendChild(toastXml.CreateTextNode(message));
+
+            IXmlNode toastNode = toastXml.SelectSingleNode("/toast");
+            ((XmlElement)toastNode).SetAttribute("duration", "long");           
+
+            ToastNotification toast = new ToastNotification(toastXml);
+            ToastNotificationManager.CreateToastNotifier().Show(toast);
+            //Show toast notification.  
+        }
+
+
+		//
+
+		if (SideBar.Margin.Left == -256)
+            {
+                Movesb.Begin(); SideBar.Margin = new Thickness(0, -37, 0, -14);
+            }
+            else { Hidesb.Begin(); SideBar.Margin = new Thickness(-256, -37, 0, -14); }
+		//
+
+
+
+		  
+        <Grid x:Name="layoutPadrao" Background="#1E90FF" Opacity="95">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Definição da barra de título da APP -->
+        <Grid x:Name="barraTitulo" Background="#1E90FF" Grid.Row="0" Height="70">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Source="Assets/menu.png" HorizontalAlignment="Left" Tapped="Image_Tapped" Grid.ColumnSpan="2" Width="66"/>
+
+            <TextBlock Grid.Column="1" x:Name="Visitante" Margin="90,19,0,2" FontFamily="Calibri" FontSize="25" Text="Olá, Visitante!" Foreground="#FFFBFBFB"/>
+
+        </Grid>
+        <!-- Definição do espaço reservado para
+    o conteúdo principal da APP e para o
+    menu hamburger -->
+
+        <drawerLayout:DrawerLayout Grid.Row="1" x:Name="DrawerLayout">
+            <!-- Conteúdo principal da APP -->
+            <Grid x:Name="conteudoPrincipal" Background="White">
+                <!--<ProgressRing x:Name="RingInicial" IsActive="True" Margin="-10,-1,-6,-43" RenderTransformOrigin="0.5,0.5" Background="#FFF3F3F3" />-->
+
+                <Grid x:Name="grid" Background="#FFF1F1F1" Margin="0,-0.333,0,0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.Projection>
+                        <PlaneProjection/>
+                    </Grid.Projection>
+                    <!--LISTVIEW das CATEGORIAS-->
+
+                    <ListView Margin="5,3,5,0" CharacterSpacing="5" Name="listitem" RenderTransformOrigin="0.5,0.5" SelectionMode="Single" IsSwipeEnabled="False" Grid.Row="1" SelectionChanged="listitem_SelectionChanged">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,5,0,5">
+                                    <Image x:Name="Categorias" Source="{Binding Path=ImgCategorias }" NineGrid="5,1" Margin="5,0" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <adduplex:AdControl 
+                        x:Name="Home_Adduplex"
+                        Grid.Row="1" 
+                        AdUnitId="201639"
+                        Width="400"
+                        Height="80"
+                        AppKey="8113610e-bb64-4c28-a390-c3481b83776c"         
+                        Margin="0,0,0,3" VerticalAlignment="Bottom" Visibility="Collapsed" />
+
+                    <WindowsPhone81:AdMediatorControl 
+                        x:Name="Home_ADS"
+                        Margin="43,464,37,6"
+                        Id="AdMediator-Id-720c84d6-fe1f-49de-9634-5cf6a66b594f" 
+                        Width="320"
+                        Height="50"         
+                        Grid.Row="1" VerticalAlignment="Bottom"                        
+                        AdMediatorError="Home_ADS_AdMediatorError"/>
+                </Grid>
+
+            </Grid>
+
+
+            <!-- Conteúdo do menu hamburger -->
+            <Grid x:Name="conteudoMenu" Background="#FFF1F1F1" Margin="0,0,180,0">
+                <ListView Name="lvOpcoesMenu" Foreground="Black">
+                    <StackPanel VerticalAlignment="Top" Width="400">
+                        <Button Content="❤ Favoritos" Click="Button_Click_1" HorizontalContentAlignment="Left" Height="60" Background="DodgerBlue" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Top" Width="400">
+                        <Button Content="🔧 Configurações" Click="Button_Click" HorizontalContentAlignment="Left" Height="60" Background="DodgerBlue" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Top" Width="400">
+                        <Button x:Name="Remover_ADS" Content="🚫 Remover Anúncios" Click="Remover_ADS_Click" HorizontalContentAlignment="Left" Height="60" Background="DodgerBlue" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Top" Width="400">
+                        <Button x:Name="Avaliar" Content="🌟 Avaliar o app" Click="Avaliar_Click" HorizontalContentAlignment="Left" Height="60" Background="DodgerBlue" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Top" Width="400">
+                        <Button x:Name="SendFeedback" Click="SendFeedback_Click"  Content="😊 FeedBack" Height="60" HorizontalContentAlignment="Left" Background="DodgerBlue" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Top" Width="400">
+                        <Button x:Name="About" Click="About_Click" Content="❔  Sobre" Height="60" HorizontalContentAlignment="Left" Background="DodgerBlue" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <!--<ListViewItem x:Name="Favoritos" Content="📰 Notícias" Background="#FF0B6CF8" FontSize="20" Width="401" Margin="0,5" Tapped="Noticias_Tapped" Foreground="White"/>
+                    <ListViewItem x:Name="Portal_Aluno" Content="🎓 Portal Acadêmico" Tapped="Portal_Aluno_Tapped" Background="#FF0B6CF8" FontSize="20" Width="399" Margin="0,0,0,5" Foreground="White"/>
+                    <ListViewItem x:Name="Carga_horaria" Content="⌚ Carga Horária" FontSize="20" Background="#FF0B6CF8" Width="400" Margin="0,0,0,5" Tapped="Carga_horaria_Tapped" Foreground="White"/>
+                    <ListViewItem x:Name="FeedBack" Content="😊 FeedBack" Background="#FF0B6CF8" FontSize="20" Width="400" Margin="0,0,0,5" Tapped="FeedBack_Tapped" Foreground="White"/>
+                    <ListViewItem x:Name="Sobre" Content="❔  Sobre" FontSize="20" Background="#FF0B6CF8" Width="401" Tapped="Sobre_Tapped" Foreground="White"/>-->
+                    <!--<ListBoxItem x:Name="x:Name="Favoritos" Content="❤ " Background="DodgerBlue" FontSize="20" Width="401" Margin="0,5" Tapped="Favoritos_Tapped" Foreground="White"/>" Content="❤ Favoritos" Background="DodgerBlue" FontSize="20" Width="401" Margin="0,5" Tapped="Favoritos_Tapped" Foreground="White"/>
+                    <ListBoxItem x:Name="Configuracoes" Content="🔧 Configurações" Tapped="Configuracoes_Tapped" Background="DodgerBlue" FontSize="20" Width="399" Margin="0,0,0,5" Foreground="White"/>
+                    <ListBoxItem x:Name="Remover_Anuncios" Content="🚫 Remover Anúncios" FontSize="20" Background="DodgerBlue" Width="400" Margin="0,0,0,5" Tapped="Remover_Anuncios_Tapped" Foreground="White"/>
+                    <ListBoxItem x:Name="Avaliar_App" Content="🌟 Avaliar o app" FontSize="20" Background="DodgerBlue" Width="400" Margin="0,0,0,5" Tapped="Avaliar_App_Tapped" Foreground="White"/>
+                    <ListBoxItem x:Name="FeedBack" Content="😊 FeedBack" Background="DodgerBlue" FontSize="20" Width="400" Margin="0,0,0,5" Tapped="FeedBack_Tapped" Foreground="White"/>
+                    <ListBoxItem x:Name="Sobre" Content="❔  Sobre" FontSize="20" Background="DodgerBlue" Width="401" Tapped="Sobre_Tapped" Foreground="White"/>-->
+                </ListView>
+                <Image x:Name="image" Margin="0,360,0,0" Source="Assets/Lurasoft.png" NineGrid="5,0" HorizontalAlignment="Left" Width="210" Tapped="image_Tapped_1"/>
+            </Grid>
+        </drawerLayout:DrawerLayout>
+    </Grid>
+
