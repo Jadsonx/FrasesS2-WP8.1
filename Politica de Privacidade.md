@@ -36,5 +36,7 @@ O Frases S2 pode modificar ou atualizar esta Política de Privacidade de tempos 
 A data de efetivação desta Política de Privacidade é 17 de Abril de 2019.
 
 [LURASOFT](https://www.instagram.com/luraxsoft)
+
 [Twitter](https://twitter.com/jadsonx)
+
 [Instagram](https://www.instagram.com/jadsonxsantos)
